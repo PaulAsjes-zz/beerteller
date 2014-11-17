@@ -1,21 +1,23 @@
 body {
     background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Montserrat;
     color: #333;
 }
 
-.hero-unit {
+.question {
     margin: 0 auto;
-    max-width: 300px;
-    font-size: 18px;
+    max-width: 500px;
+    font-size: 30px;
     font-weight: 200;
-    line-height: 30px;
+    line-height: 20px;
     background-color: #eee;
     border-radius: 6px;
-    padding: 60px;
+    padding: 5px;
 }
 
-.hero-unit h1 {
+.question h1 {
+    text-align: center;
+    text-transform: uppercase;
     font-size: 60px;
     line-height: 1;
     letter-spacing: -1px;
