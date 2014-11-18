@@ -1,5 +1,5 @@
 {
-	"q1" : {
+	"q1": {
 		"text": "Question 1 text",
 		"options": [
 			"Yes",
@@ -7,5 +7,13 @@
 		],
 		"next": [2, 3]
 
+	},
+	"q2": {
+		"text": "Question 2 text",
+		"options": [
+			"One",
+			"Two"
+		],
+		"next": [4, 5]
 	}
 }

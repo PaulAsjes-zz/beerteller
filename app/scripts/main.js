@@ -1,24 +1,39 @@
 function BeerTeller() {
 	"use strict";
 
-	var tree = {};
+	var tree,
+		left,
+		right,
+		current = 1;
 
 	this.init = function() {
 		document.body.style.background = "#" + randomHexColour();
 
-		callAjax("data/data.json", function(data) {
-			tree = data;
-		});
-
-		console.log(tree);
+		callAjax("data/data.json", start);
 	}
 
 	function randomHexColour() {
 		return Math.random().toString(16).slice(-6);
 	}
 
-	function next() {
+	function start(data) {
+		tree = JSON.parse(data);
+		setQuestion(tree["q" + current]);
 
+		left = new Option(document.querySelector(".left"));
+		right = new Option(document.querySelector(".right"));
+
+		left.setText(tree["q" + current].options[0]);
+		right.setText(tree["q" + current].options[1]);
+	}
+
+	function setQuestion(q) {
+		var questionText = document.querySelector(".question-text");
+		questionText.innerHTML = q.text;
+	}
+
+	function next() {
+		current++;
 	}
 
 	function restart() {
@@ -26,11 +41,10 @@ function BeerTeller() {
 	}
 
 	function callAjax(url, callback){
-	    var xmlhttp;
 	    // compatible with IE7+, Firefox, Chrome, Opera, Safari
-	    xmlhttp = new XMLHttpRequest();
-	    xmlhttp.onreadystatechange = function(){
-	        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+	    var xmlhttp = new XMLHttpRequest();
+	    xmlhttp.onreadystatechange = function() {
+	        if (xmlhttp.readyState === XMLHttpRequest.DONE && xmlhttp.status === 200){
 	            callback(xmlhttp.responseText);
 	        }
 	    }

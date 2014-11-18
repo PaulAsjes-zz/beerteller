@@ -4,7 +4,7 @@ body {
     color: #333;
 }
 
-.question {
+.question-container {
     margin: 0 auto;
     max-width: 500px;
     font-size: 30px;
@@ -15,10 +15,35 @@ body {
     padding: 5px;
 }
 
-.question h1 {
+.question-container h1 {
     text-align: center;
     text-transform: uppercase;
     font-size: 60px;
     line-height: 1;
     letter-spacing: -1px;
+}
+
+.answers {
+    margin: 0 auto;
+    padding: 20px;
+    font-size: 75px;
+    font-weight: 200;
+    max-width: 600px;
+    text-align: center;
+    cursor: pointer;
+    
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
 }
