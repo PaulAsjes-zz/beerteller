@@ -1,14 +1,13 @@
 var OptionManager = function(data) {
+	"use strict";
 	this.tree = data;
 	this.options = [];
 };
 
-OptionManager.prototype.addOption = function(el) {
+OptionManager.prototype.addOption = function(el, cb) {
 	this.options.push(new Option(el));
-};
-
-OptionManager.prototype.removeOption = function(el) {
-
+	var self = this;
+	el.addEventListener("click", cb);
 };
 
 OptionManager.prototype.setOptionText = function(textArr) {
