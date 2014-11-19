@@ -4,6 +4,7 @@ function BeerTeller() {
 	var tree,
 		left,
 		right,
+		optionManager,
 		current = 1;
 
 	this.init = function() {
@@ -20,11 +21,18 @@ function BeerTeller() {
 		tree = JSON.parse(data);
 		setQuestion(tree["q" + current]);
 
-		left = new Option(document.querySelector(".left"));
-		right = new Option(document.querySelector(".right"));
+		optionManager = new OptionManager(tree);
 
-		left.setText(tree["q" + current].options[0]);
-		right.setText(tree["q" + current].options[1]);
+		optionManager.addOption(document.querySelector(".left"));
+		optionManager.addOption(document.querySelector(".right"));
+
+		optionManager.setOptionText(tree["q" + current].options);
+
+		// left = new Option(document.querySelector(".left"));
+		// right = new Option(document.querySelector(".right"));
+
+		// left.setText(tree["q" + current].options[0]);
+		// right.setText(tree["q" + current]	.options[1]);
 	}
 
 	function setQuestion(q) {

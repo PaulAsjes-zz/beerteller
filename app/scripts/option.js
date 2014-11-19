@@ -1,24 +1,41 @@
-function Option(el) {
+var Option = function(el, cb) {
 	"use strict";
 	var next,
-		self = this,
-		text = "",
-		element = el;
+		callback = cb;
+	
+	this.copy = "",
+	this.element = el;
 
-	this.setText = function(t) {
-		self.text = t;
-		element.innerHTML = t;
-	};
-
-	this.getText = function() {
-		return self.text;
-	};
-
-	this.setNext = function(n) {
-		self.next = n;
+	function enable(cb) {
+		callback = cb;
+		element.addEventListener("click", onClick);
 	}
 
-	this.getNext = function() {
-		return self.next;
-	};
+	function disable() {
+		element.removeEventListener("click", onClick);
+	}
+
+	function onClick() {
+		disable();
+		callback();
+	}
+
+	// enable(cb);
+};
+
+Option.prototype.setText = function(t) {
+	this.copy = t;
+	this.element.innerHTML = t;
+};
+
+Option.prototype.getText = function() {
+	return this.copy;
+};
+
+Option.prototype.setNext = function(n) {
+	this.next = n;
 }
+
+Option.prototype.getNext = function() {
+	return this.next;
+};
