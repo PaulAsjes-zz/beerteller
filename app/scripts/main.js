@@ -23,14 +23,15 @@ function BeerTeller() {
 
 		optionManager = new OptionManager(tree);
 
-		optionManager.addOption(document.querySelector(".left"), optionClicked);
-		optionManager.addOption(document.querySelector(".right"), optionClicked);
+		optionManager.addOption(document.querySelector(".left"));
+		optionManager.addOption(document.querySelector(".right"));
 
-		optionManager.setOptionText(tree["q" + current].options);
+		optionManager.setOptionText(tree["q" + current].options, optionClicked);
+		optionManager.setOptionValue(tree["q" + current].next);
 	}
 
-	function optionClicked(e) {
-		console.log("clicked: " + e.currentTarget);
+	function optionClicked(next) {
+		console.log("clicked: " + next);
 	}
 
 	function setQuestion(q) {
