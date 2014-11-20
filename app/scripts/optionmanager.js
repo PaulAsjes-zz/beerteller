@@ -20,8 +20,10 @@ OptionManager.prototype.setOptionText = function(textArr) {
 		this.options[i].setText(textArr[i]);
 		// animate options out and back in with new text
 		this.options[i].element.addEventListener("click", function(e) {
+			// remove listener for the moment
 			e.currentTarget.removeEventListener("click", arguments.callee);
 
+			// find the option which was clicked so we can get the next value
 			var o = self.options.filter(function(op) {
 				return op.element === e.currentTarget;
 			});
