@@ -31,7 +31,7 @@ function BeerTeller() {
 	}
 
 	function optionClicked(next) {
-		console.log("clicked: " + next);
+		console.log("clicked:", next);
 	}
 
 	function setQuestion(q) {
