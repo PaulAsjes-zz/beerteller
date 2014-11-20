@@ -19,19 +19,23 @@ function BeerTeller() {
 
 	function start(data) {
 		tree = JSON.parse(data);
-		setQuestion(tree["q" + current]);
 
-		optionManager = new OptionManager(tree);
+		optionManager = new OptionManager(tree, next);
 
 		optionManager.addOption(document.querySelector(".left"));
 		optionManager.addOption(document.querySelector(".right"));
 
-		optionManager.setOptionText(tree["q" + current].options, optionClicked);
-		optionManager.setOptionValue(tree["q" + current].next);
+		populate();
 	}
 
 	function optionClicked(next) {
-		console.log("clicked:", next);
+		
+	}
+
+	function populate() {		
+		setQuestion(tree["q" + current]);
+		optionManager.setOptionText(tree["q" + current].options, optionClicked);
+		optionManager.setOptionValue(tree["q" + current].next);
 	}
 
 	function setQuestion(q) {
@@ -39,8 +43,11 @@ function BeerTeller() {
 		questionText.innerHTML = q.text;
 	}
 
-	function next() {
-		current++;
+	function next(n) {
+		current = n;
+
+		console.log(n);
+		populate();
 	}
 
 	function restart() {
