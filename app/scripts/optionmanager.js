@@ -33,7 +33,7 @@ OptionManager.prototype.setOptionText = function(textArr) {
 	}
 };
 
-OptionManager.prototype.hide = function() {
+OptionManager.prototype.hideAllOptions = function() {
 	// potentially only hide one option if an argument is passed through
 	for (var i = 0; i < this.options.length; i++) {
 		this.options[i].hide();

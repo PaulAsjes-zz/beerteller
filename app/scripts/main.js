@@ -44,7 +44,14 @@ function BeerTeller() {
 				optionManager.setOptionValue(question.next);		
 			} else {
 				console.log("result reached");
-				optionManager.hide();			
+				optionManager.hideAllOptions();	
+
+				// restart functionality
+				var restart = document.querySelector(".restart")
+				restart.style.display = "block";
+				restart.addEventListener("click", function(e) {
+					document.location.reload(true);
+				});
 			}
 		}
 	}

@@ -17,3 +17,7 @@ Option.prototype.setNext = function(n) {
 Option.prototype.hide = function() {
 	this.element.style.display = "none";
 };
+
+Option.prototype.show = function() {
+	this.element.style.display = "block";
+};
