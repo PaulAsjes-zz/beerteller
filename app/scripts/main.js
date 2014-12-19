@@ -34,11 +34,11 @@ function BeerTeller() {
 
 	function populate() {		
 		var question = tree["q" + current];
-		setQuestion(question);
 
 		if (!question) {
 			console.error("Question does not exist!");
 		} else {
+			setQuestion(question);
 			if (question.options) {
 				optionManager.setOptionText(question.options, optionClicked);
 				optionManager.setOptionValue(question.next);		
