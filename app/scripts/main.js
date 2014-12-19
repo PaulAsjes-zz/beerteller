@@ -33,9 +33,20 @@ function BeerTeller() {
 	}
 
 	function populate() {		
-		setQuestion(tree["q" + current]);
-		optionManager.setOptionText(tree["q" + current].options, optionClicked);
-		optionManager.setOptionValue(tree["q" + current].next);
+		var question = tree["q" + current];
+		setQuestion(question);
+
+		if (!question) {
+			console.error("Question does not exist!");
+		} else {
+			if (question.options) {
+				optionManager.setOptionText(question.options, optionClicked);
+				optionManager.setOptionValue(question.next);		
+			} else {
+				console.log("result reached");
+				optionManager.hide();			
+			}
+		}
 	}
 
 	function setQuestion(q) {

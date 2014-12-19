@@ -33,6 +33,13 @@ OptionManager.prototype.setOptionText = function(textArr) {
 	}
 };
 
+OptionManager.prototype.hide = function() {
+	// potentially only hide one option if an argument is passed through
+	for (var i = 0; i < this.options.length; i++) {
+		this.options[i].hide();
+	}
+};
+
 OptionManager.prototype.setOptionValue = function(nextArr) {
 	if (!nextArr || nextArr.length < 1) {
 		return;

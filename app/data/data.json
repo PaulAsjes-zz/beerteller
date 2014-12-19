@@ -18,5 +18,13 @@
 	},
 	"q3": {
 		"text": "Result"
+	},
+	"q4": {
+		"text": "Question 4 text",
+		"options": [
+			"Yes",
+			"No"
+		],
+		"next": [6, 7]
 	}
 }

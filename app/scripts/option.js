@@ -12,4 +12,8 @@ Option.prototype.setText = function(t) {
 
 Option.prototype.setNext = function(n) {
 	this.next = n;
-}
+};
+
+Option.prototype.hide = function() {
+	this.element.style.display = "none";
+};
