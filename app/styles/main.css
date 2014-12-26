@@ -42,6 +42,11 @@ body {
     user-select: none;
 }
 
+.answers div:hover {
+    transition: color 400ms;
+    color: #000;
+}
+
 .left {
     float: left;
 }
