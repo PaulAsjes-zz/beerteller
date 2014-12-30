@@ -1,0 +1,62 @@
+@import "compass/reset";
+
+body {
+    font-family: Montserrat;
+    color: #333;
+}
+
+.question-container {
+    margin: 0 auto;
+    margin-top: 5%;
+    max-width: 1000px;
+    font-size: 30px;
+    font-weight: 200;
+    line-height: 20px;
+    background-color: #eee;
+    border-radius: 6px;
+    padding: 25px;
+
+    h1 {
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 60px;
+        line-height: 1;
+        letter-spacing: -1px;
+    }
+}
+
+.answers {
+    margin: 0 auto;
+    padding: 20px;
+    font-size: 75px;
+    font-weight: 200;
+    max-width: 600px;
+    text-align: center;
+    cursor: pointer;
+    color: #fefefe;
+    transition: color 400ms;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    div:hover {
+        transition: color 400ms;
+        color: #333;
+    }
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.restart {
+    display: none;
+}
