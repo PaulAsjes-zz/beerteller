@@ -2,18 +2,20 @@ function BeerTeller() {
 	"use strict";
 
 	var tree,
-		left,
-		right,
 		optionManager,
+		identifier,
 		current = 1;
 
-	this.init = function() {
+	this.init = function(sIdentifier) {
 		document.body.style.background = "#" + randomHexColour();
 
-		callAjax("data/data.json", start);
-	}
+		identifier = sIdentifier;
+
+		ajaxReq("data/data.json", start);
+	};
 
 	function randomHexColour() {
+		// might want to do a little checking to make sure the colour selected is not too light
 		return Math.random().toString(16).slice(-6);
 	}
 
@@ -28,30 +30,25 @@ function BeerTeller() {
 		populate();
 	}
 
-	function optionClicked(next) {
-		
-	}
-
-	function populate() {		
-		var question = tree["q" + current];
+	function populate() {
+		var question = tree[identifier + current];
+		var restartBtn = document.querySelector(".restart");
 
 		if (!question) {
 			console.error("Question does not exist!");
 		} else {
 			setQuestion(question);
 			if (question.options) {
-				optionManager.setOptionText(question.options, optionClicked);
-				optionManager.setOptionValue(question.next);		
+				optionManager.showOptions();
+
+				optionManager.setOptionText(question.options);
+				optionManager.setOptionValue(question.next);
 			} else {
-				console.log("result reached");
-				optionManager.hideAllOptions();	
+				optionManager.hideOptions();
 
 				// restart functionality
-				var restart = document.querySelector(".restart")
-				restart.style.display = "block";
-				restart.addEventListener("click", function(e) {
-					document.location.reload(true);
-				});
+				restartBtn.style.display = "block";
+				restartBtn.addEventListener("click", restart);
 			}
 		}
 	}
@@ -63,23 +60,32 @@ function BeerTeller() {
 
 	function next(n) {
 		current = n;
+		// animate question/options out, then populate
 
-		console.log(n);
-		populate();
+		// can probably do this a better way
+		Velocity(document.querySelector(".question-text"), {opacity: 0}, {duration:250, complete: function() {
+				populate();
+				Velocity(document.querySelector(".question-text"), {opacity: 1}, {duration: 250});
+			}
+		});
 	}
 
 	function restart() {
+		var restartBtn = document.querySelector(".restart");
+		restartBtn.removeEventListener("click", restart);
+		restartBtn.style.display = "none";
 
+		next(1);
 	}
 
-	function callAjax(url, callback){
+	function ajaxReq(url, callback){
 	    // compatible with IE7+, Firefox, Chrome, Opera, Safari
 	    var xmlhttp = new XMLHttpRequest();
 	    xmlhttp.onreadystatechange = function() {
 	        if (xmlhttp.readyState === XMLHttpRequest.DONE && xmlhttp.status === 200){
 	            callback(xmlhttp.responseText);
 	        }
-	    }
+	    };
 	    xmlhttp.open("GET", url, true);
 	    xmlhttp.send();
 	}
@@ -87,5 +93,7 @@ function BeerTeller() {
 
 window.onload = function() {
 	var beerTeller = new BeerTeller();
-	beerTeller.init();
-}
+
+	// specifier the unique identifier for the questions in the json file. 'q' in this case.
+	beerTeller.init("q");
+};

@@ -65,7 +65,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-        
+
         connect: {
             options: {
                 port: 9000,
@@ -147,7 +147,7 @@ module.exports = function (grunt) {
         jshint: {
             options: {
                 jshintrc: '.jshintrc',
-                reporter: require('jshint-stylish')
+                reporter: require('jshint-stylish'),
             },
             all: [
                 '<%= yeoman.app %>/scripts/{,*/}*.js',
@@ -228,7 +228,7 @@ module.exports = function (grunt) {
             }
         },
 
-        
+
         modernizr: {
 
             // Path to the build you're using for development.
@@ -430,12 +430,12 @@ module.exports = function (grunt) {
         'test',
         'build'
     ]);
-    
+
     grunt.registerTask('screenshots', [
         'clean:server',
         'concurrent:server',
         'connect:livereload',
         'autoshot'
     ]);
-    
+
 };

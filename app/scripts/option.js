@@ -1,8 +1,10 @@
-var Option = function(el, cb) {
-	"use strict";	
-	this.copy = "",
+"use strict";
+
+var Option = function(el, i) {
+	this.copy = "";
 	this.element = el;
 	this.next = -1;
+	this.id = i;
 };
 
 Option.prototype.setText = function(t) {
