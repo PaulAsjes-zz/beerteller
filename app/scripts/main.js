@@ -4,10 +4,13 @@ function BeerTeller() {
 	var tree,
 		optionManager,
 		identifier,
-		current = 1;
+		current = 1,
+		$restartBtn = document.querySelector(".restart"),
+		$left = document.querySelector(".left"),
+		$right = document.querySelector(".right");
 
 	this.init = function(sIdentifier) {
-		document.body.style.background = "#" + randomHexColour();
+		document.body.style.background = randomHexColour();
 
 		identifier = sIdentifier;
 
@@ -16,7 +19,7 @@ function BeerTeller() {
 
 	function randomHexColour() {
 		// might want to do a little checking to make sure the colour selected is not too light
-		return Math.random().toString(16).slice(-6);
+		return "#" + Math.random().toString(16).slice(-6);
 	}
 
 	function start(data) {
@@ -24,15 +27,14 @@ function BeerTeller() {
 
 		optionManager = new OptionManager(tree, next);
 
-		optionManager.addOption(document.querySelector(".left"));
-		optionManager.addOption(document.querySelector(".right"));
+		optionManager.addOption($left);
+		optionManager.addOption($right);
 
 		populate();
 	}
 
 	function populate() {
 		var question = tree[identifier + current];
-		var restartBtn = document.querySelector(".restart");
 
 		if (!question) {
 			console.error("Question does not exist!");
@@ -47,8 +49,11 @@ function BeerTeller() {
 				optionManager.hideOptions();
 
 				// restart functionality
-				restartBtn.style.display = "block";
-				restartBtn.addEventListener("click", restart);
+				Velocity($restartBtn, {opacity: 1}, {
+					duration: 250,
+					display: "block"
+				});
+				$restartBtn.addEventListener("click", restart);
 			}
 		}
 	}
@@ -61,19 +66,30 @@ function BeerTeller() {
 	function next(n) {
 		current = n;
 		// animate question/options out, then populate
+		Velocity($left, {marginLeft: "-100%"}, {duration: 250, easing: "easeInOut"});
+		Velocity($right, {marginRight: "-100%"}, {duration: 250, easing: "easeInOut"});
 
-		// can probably do this a better way
-		Velocity(document.querySelector(".question-text"), {opacity: 0}, {duration:250, complete: function() {
+		var $questionText = document.querySelector(".question-text");
+		Velocity($questionText, {opacity: 0}, {duration:250,
+			complete: function() {
 				populate();
-				Velocity(document.querySelector(".question-text"), {opacity: 1}, {duration: 250});
+				Velocity($questionText, "reverse");
+				Velocity($left, "reverse");
+				Velocity($right, "reverse");
 			}
 		});
 	}
 
 	function restart() {
-		var restartBtn = document.querySelector(".restart");
-		restartBtn.removeEventListener("click", restart);
-		restartBtn.style.display = "none";
+		$restartBtn.removeEventListener("click", restart);
+		Velocity($restartBtn, {opacity: 0}, {
+			duration: 250,
+			display: "none"
+		});
+
+		Velocity(document.body, {
+			backgroundColor: randomHexColour()
+		});
 
 		next(1);
 	}
