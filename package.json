@@ -1,38 +1,22 @@
 {
   "name": "beerteller",
-  "version": "0.0.0",
-  "dependencies": {},
-  "devDependencies": {
-    "connect-livereload": "~0.1.4",
-    "grunt": "~0.4.1",
-    "grunt-autoshot": "~0.2.0",
-    "grunt-browser-sync": "~0.5.7",
-    "grunt-concurrent": "~0.4.0",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-coffee": "~0.7.0",
-    "grunt-contrib-compass": "^1.0.1",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-connect": "~0.5.0",
-    "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-cssmin": "~0.7.0",
-    "grunt-contrib-htmlmin": "~0.1.3",
-    "grunt-contrib-imagemin": "~0.2.0",
-    "grunt-contrib-jshint": "~0.7.0",
-    "grunt-contrib-uglify": "~0.2.0",
-    "grunt-contrib-watch": "~0.4.0",
-    "grunt-mocha": "~0.4.0",
-    "grunt-modernizr": "~0.3.0",
-    "grunt-notify": "~0.2.16",
-    "grunt-open": "~0.2.0",
-    "grunt-rev": "~0.1.0",
-    "grunt-svgmin": "~0.2.0",
-    "grunt-usemin": "~0.1.10",
-    "grunt-webp": "~0.0.1",
-    "jshint-stylish": "~0.1.5",
-    "load-grunt-tasks": "~0.2.0",
-    "time-grunt": "~0.2.0"
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts-ts": "2.8.0"
   },
-  "engines": {
-    "node": ">=0.8.0"
+  "scripts": {
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "test": "react-scripts-ts test --env=jsdom",
+    "eject": "react-scripts-ts eject"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.0.0",
+    "@types/node": "^8.5.2",
+    "@types/react": "^16.0.31",
+    "@types/react-dom": "^16.0.3"
   }
 }
