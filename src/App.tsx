@@ -3,6 +3,7 @@ import './App.css';
 import data from './data';
 import Option from './Option';
 import RestartButton from './RestartButton';
+import Wave from './Wave';
 
 const logo = require('./logo.svg');
 
@@ -10,7 +11,18 @@ class App extends React.Component {
 
   public state = {
     current: 1,
+    width: 0,
   };
+
+  private waveContainer: HTMLDivElement | null;
+
+  public componentDidMount() {
+    if (this.waveContainer) {
+      this.setState({
+        width: this.waveContainer.offsetWidth,
+      });
+    }
+  }
 
   public render() {
     const question = this.getQuestion(this.state.current);
@@ -21,6 +33,9 @@ class App extends React.Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Beerteller</h2>
+        </div>
+        <div className="Wave-container" ref={waveContainer => this.waveContainer = waveContainer}>
+          <Wave width={this.state.width} height={200}/>
         </div>
         <div className="Container">
           <div className="Content">
