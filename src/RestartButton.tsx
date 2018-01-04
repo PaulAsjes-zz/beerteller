@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './RestartButton.css';
 
 interface Props {
   onClick(event: {}): void;

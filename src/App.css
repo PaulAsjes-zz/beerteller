@@ -1,5 +1,12 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+
 .App {
   text-align: center;
+  font-family: "Lobster", cursive;
+  background-color: orange;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .App-logo {
@@ -8,14 +15,10 @@
 }
 
 .App-header {
-  background-color: #222;
+  background-color: white;
   height: 150px;
   padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
+  color: orange;
 }
 
 @keyframes App-logo-spin {
@@ -23,15 +26,17 @@
   to { transform: rotate(360deg); }
 }
 
+.Container {
+  color: #fff;
+  font-size: 24px;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .Options {
   display: flex;
   justify-content: space-around;
-}
-
-.Option {
-  cursor: pointer;
-}
-
-.Restart {
-  cursor: pointer;
 }

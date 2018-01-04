@@ -22,17 +22,21 @@ class App extends React.Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Beerteller</h2>
         </div>
-        <div>{question.text}</div>
-        <div className="Options">
-          {options.map((option: string, index: number) => {
-            return <Option text={option} key={index} onClick={this.handleClick.bind(this, question.next[index])}/>;
-          })}
+        <div className="Container">
+          <div className="Content">
+            <div>{question.text}</div>
+            <div className="Options">
+              {options.map((option: string, index: number) => {
+                return <Option text={option} key={index} onClick={this.handleClick.bind(this, question.next[index])}/>;
+              })}
+            </div>
+            {
+              options.length < 1 ? 
+              <RestartButton onClick={this.restart.bind(this)} />
+              : null
+            }
+          </div>
         </div>
-        {
-          options.length < 1 ? 
-          <RestartButton onClick={this.restart.bind(this)} />
-          : null
-        }
       </div>
     );
   }
