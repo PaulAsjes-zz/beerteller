@@ -36,21 +36,26 @@ class Wave extends React.Component<Props> {
   public render() {
     return (
       <svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg" id="intro">
-        <path className="Wave" d={this.state.d} fill="#333"/>
+        <path className="Wave" d={this.state.d} fill="#000"/>
       </svg>
     );
   }
 
   private calculateWavePoints(factor: number) {
-    const points = [];
+    const points: Array<Point> = [];
 
     const { 
       wavePoints,
-      waveWidth,
       waveDelta,
       waveHeight,
       speed,
     } = this.state;
+
+    const waveWidth = this.props.width;
+
+    if (waveWidth < 1) {
+      return points;
+    }
 
     for (let i = 0; i <= wavePoints; i++) {
       const xPos: number = i / (wavePoints * waveWidth);
@@ -68,6 +73,15 @@ class Wave extends React.Component<Props> {
   }
 
   private buildPath(points: Array<Point>) {
+    const { 
+      width,
+      height,
+    } = this.props; 
+
+    if (width < 1) {
+      return '';
+    }
+
     let SVGString = 'M ' + points[0].x + ' ' + points[0].y;
   
     const cp0 = {
@@ -91,11 +105,6 @@ class Wave extends React.Component<Props> {
       prevCp = cp1;
       inverted = -inverted;
     };
-    
-    const { 
-      width,
-      height,
-     } = this.props; 
 
     SVGString += ' L ' + width + ' ' + height;
     SVGString += ' L 0 ' + height + ' Z';
@@ -114,14 +123,18 @@ class Wave extends React.Component<Props> {
       
       const factor = this.totalTime * Math.PI;
 
+      // console.log(this.calculateWavePoints(factor));
+
+      // console.log(this.buildPath(this.calculateWavePoints(factor)));
+
       this.setState({
         d: this.buildPath(this.calculateWavePoints(factor))
-      })
+      });
 
     } else {
       this.lastUpdate = now;
+      this.tick();
     }
-    
     // window.requestAnimationFrame(this.tick.bind(this));
   };
 }

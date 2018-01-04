@@ -12,6 +12,7 @@ class App extends React.Component {
   public state = {
     current: 1,
     width: 0,
+    height: 0,
   };
 
   private waveContainer: HTMLDivElement | null;
@@ -20,6 +21,7 @@ class App extends React.Component {
     if (this.waveContainer) {
       this.setState({
         width: this.waveContainer.offsetWidth,
+        height: this.waveContainer.offsetHeight,
       });
     }
   }
@@ -35,7 +37,7 @@ class App extends React.Component {
           <h2>Beerteller</h2>
         </div>
         <div className="Wave-container" ref={waveContainer => this.waveContainer = waveContainer}>
-          <Wave width={this.state.width} height={200}/>
+          <Wave width={this.state.width} height={this.state.height}/>
         </div>
         <div className="Container">
           <div className="Content">
