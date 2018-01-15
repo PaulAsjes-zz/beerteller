@@ -16,6 +16,7 @@ interface Point {
 }
 
 class Wave extends React.Component<Props> {
+  
   public state = {
     d: '',
   };
