@@ -13,6 +13,8 @@ class App extends React.Component {
     current: 1,
     width: 0,
     height: 0,
+    // if there's a touchscreen, it's probably mobile.
+    wavePoints: navigator.maxTouchPoints ? 2 : 4,
   };
 
   private waveContainer: HTMLDivElement | null;
@@ -37,7 +39,11 @@ class App extends React.Component {
           <h2>Beerteller</h2>
         </div>
         <div className="Wave-container" ref={waveContainer => this.waveContainer = waveContainer}>
-          <Wave width={this.state.width} height={this.state.height}/>
+          <Wave 
+            width={this.state.width} 
+            height={this.state.height} 
+            points={this.state.wavePoints}
+          />
         </div>
         <div className="Container">
           <div className="Content">
@@ -46,18 +52,21 @@ class App extends React.Component {
             </div>
             <div className="Options">
               {options.map((option: string, index: number) => {
-                return <Option text={option} key={index} onClick={this.handleClick.bind(this, question.next[index])}/>;
+                return <Option text={option} key={index} onClick={() => this.handleClick(question.next[index])}/>;
               })}
             </div>
             {
               options.length < 1 ? 
-              <RestartButton onClick={this.restart.bind(this)} />
+              <RestartButton onClick={() => this.restart()} />
               : null
             }
           </div>
         </div>
         <div className="Footer">
-            Made with ♥ by <a href="https://twitter.com/paul_asjes">@paul_asjes</a>. Inspired by <a href="http://coolmaterial.com/food-drink/flowchart-what-style-of-beer-should-you-drink/">Cool Material</a>
+            Made with ♥ by <a href="https://twitter.com/paul_asjes">@paul_asjes</a>.
+            Inspired by <a href="http://coolmaterial.com/food-drink/flowchart-what-style-of-beer-should-you-drink/">
+              Cool Material
+            </a>
         </div>
       </div>
     );
