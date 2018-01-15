@@ -2,9 +2,12 @@ import * as React from 'react';
 import './Wave.css';
 
 interface Props {
-  width: number;
-  height: number;
-  points: number;
+  width: number; // Wave SVG width (usually container width)
+  height: number; // Wave SVG height
+  points: number; // How many points will be used to compute our wave
+  waveHeight: number; // Position from the top of container
+  waveDelta: number; // Wave amplitude
+  speed: number; // Wave animation speed
 }
 
 interface Point {
@@ -12,27 +15,9 @@ interface Point {
   y: number;
 }
 
-interface Options {
-  waveWidth: number;
-  waveHeight: number;
-  waveDelta: number;
-  speed: number;
-  wavePoints: number;
-  points: Array<Point>;
-}
-
 class Wave extends React.Component<Props> {
   public state = {
     d: '',
-  };
-  
-  private options: Options = {
-    waveWidth: this.props.width, // Wave SVG width (usually container width)
-    waveHeight: 100, // Position from the top of container
-    waveDelta: 20, // Wave amplitude
-    speed: .7, // Wave animation speed
-    wavePoints: this.props.points, // How many points will be used to compute our wave
-    points: [],
   };
 
   private lastUpdate: number = 0;
@@ -57,10 +42,9 @@ class Wave extends React.Component<Props> {
       waveDelta,
       waveHeight,
       speed,
-    } = this.options;
-
-    const waveWidth = this.props.width;
-    const wavePoints = this.props.points;
+      width: waveWidth,
+      points: wavePoints,
+    } = this.props;
 
     for (let i = 0; i <= wavePoints; i++) {
       const xPos: number = (i / wavePoints) * waveWidth;

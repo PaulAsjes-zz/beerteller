@@ -43,6 +43,9 @@ class App extends React.Component {
             width={this.state.width} 
             height={this.state.height} 
             points={this.state.wavePoints}
+            waveHeight={100}
+            waveDelta={20}
+            speed={.7}
           />
         </div>
         <div className="Container">
