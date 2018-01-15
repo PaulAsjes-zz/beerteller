@@ -1,3 +1,4 @@
-.Wave {
-  /* height: 100%; */
+.WaveSVG {
+  position: absolute;
+  left: 0;
 }
