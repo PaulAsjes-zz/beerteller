@@ -41,7 +41,9 @@ class App extends React.Component {
         </div>
         <div className="Container">
           <div className="Content">
-            <div>{question.text}</div>
+            <div className={options.length ? '' : 'Result'}>
+              {question.text}
+            </div>
             <div className="Options">
               {options.map((option: string, index: number) => {
                 return <Option text={option} key={index} onClick={this.handleClick.bind(this, question.next[index])}/>;
@@ -53,6 +55,9 @@ class App extends React.Component {
               : null
             }
           </div>
+        </div>
+        <div className="Footer">
+            Made with ♥ by <a href="https://twitter.com/paul_asjes">@paul_asjes</a>. Inspired by <a href="http://coolmaterial.com/food-drink/flowchart-what-style-of-beer-should-you-drink/">Cool Material</a>
         </div>
       </div>
     );
