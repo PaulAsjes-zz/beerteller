@@ -1,0 +1,35 @@
+.Question {  
+  transition: all 500ms ease-in-out;
+}
+
+.Question.slideIn {
+  animation: slideIn .5s ease-in-out;
+}
+
+.Question.slideOut {
+  animation: slideOut .5s ease-in-out;
+}
+
+@keyframes slideIn {
+  0% {
+    margin-top: -2em;
+    opacity: 0;
+  }
+
+  100% {
+    margin-top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    margin-top: 0;
+    opacity: 1;
+  }
+
+  100% {
+    margin-top: 2em;
+    opacity: 0;
+  }
+} 

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import './App.css';
 import data from './data';
-import Option from './Option';
-import RestartButton from './RestartButton';
+import Question from './Question';
 import Wave from './Wave';
 import Footer from './Footer';
 
@@ -19,6 +18,8 @@ class App extends React.Component {
   };
 
   private waveContainer: HTMLDivElement | null;
+  // path of decision tree, always starts at question 1
+  private path: Array<number> = [1];
 
   public componentDidMount() {
     // update the wave container if the window is resized
@@ -30,6 +31,8 @@ class App extends React.Component {
   public render() {
     const question = this.getQuestion(this.state.current);
     const options = question.options || [];
+
+    // const prevQuestion = this.getQuestion(this.path[this.path.length - 2]);
 
     return (
       <div className="App">
@@ -50,20 +53,27 @@ class App extends React.Component {
           />
         </div>
         <div className="Container">
-          <div className="Content">
-            <div className={options.length ? '' : 'Result'}>
-              {question.text}
-            </div>
-            <div className="Options">
-              {options.map((option: string, index: number) => {
-                return <Option text={option} key={index} onClick={() => this.handleClick(question.next[index])}/>;
-              })}
-            </div>
-            {
-              options.length < 1 ? 
-              <RestartButton onClick={() => this.restart()} />
-              : null
-            }
+          <div className="Content">            
+            <Question 
+              options={options} 
+              questionText={question.text} 
+              next={question.next}
+              show={true}
+              optionClickFn={(next) => this.handleClick(next)}
+              restartClickFn={() => this.restart()}                            
+            />                        
+              {/* {
+                prevQuestion ? 
+                  <Question
+                    options={prevQuestion.options || []}
+                    questionText={prevQuestion.text}
+                    next={prevQuestion.text}
+                    show={false}
+                    optionClickFn={this.handleClick.bind(this)}
+                    restartClickFn={this.restart.bind(this)}
+                  />
+                : null
+              } */}
           </div>
         </div>
         <Footer />
@@ -79,7 +89,7 @@ class App extends React.Component {
       });
     }
   }
-
+  
   private restart() {
     this.setState({
       current: 1,
@@ -87,10 +97,12 @@ class App extends React.Component {
   }
 
   private getQuestion(num: number) {
-    return data[`q${num}`];
+    return num ? data[`q${num}`] : null;
   }
 
   private handleClick(next: number) {
+    this.path.push(next);
+
     this.setState({
       current: next,
     });
