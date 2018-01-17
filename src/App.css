@@ -10,8 +10,8 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
   height: 80px;
+  margin-left: 15px;
 }
 
 .App-header {
@@ -22,9 +22,9 @@
   color: orange;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.App-header a {
+  color: orange;
+  text-decoration: none;
 }
 
 .Container {
@@ -49,16 +49,6 @@
 .Result {
   font-size: 42px;
   padding: 1em;
-}
-
-.Footer {
-  font-size: 14px;
-  color: white;
-}
-
-a {
-  color: white;
-  text-decoration: none;
 }
 
 /* Keep screen in portrait mode */

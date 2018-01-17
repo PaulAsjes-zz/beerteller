@@ -4,6 +4,7 @@ import data from './data';
 import Option from './Option';
 import RestartButton from './RestartButton';
 import Wave from './Wave';
+import Footer from './Footer';
 
 const logo = require('./logo.svg');
 
@@ -20,12 +21,10 @@ class App extends React.Component {
   private waveContainer: HTMLDivElement | null;
 
   public componentDidMount() {
-    if (this.waveContainer) {
-      this.setState({
-        width: this.waveContainer.offsetWidth,
-        height: this.waveContainer.offsetHeight,
-      });
-    }
+    // update the wave container if the window is resized
+    window.addEventListener('resize', this.updateWindow.bind(this));
+
+    this.updateWindow();
   }
 
   public render() {
@@ -35,8 +34,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Beerteller</h2>
+          <a href="#">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h2>Beerteller</h2>
+          </a>
         </div>
         <div className="Wave-container" ref={waveContainer => this.waveContainer = waveContainer}>
           <Wave 
@@ -44,7 +45,7 @@ class App extends React.Component {
             height={this.state.height} 
             points={this.state.wavePoints}
             waveHeight={100}
-            waveDelta={20}
+            waveDelta={10}
             speed={.7}
           />
         </div>
@@ -65,14 +66,18 @@ class App extends React.Component {
             }
           </div>
         </div>
-        <div className="Footer">
-            Made with ♥ by <a href="https://twitter.com/paul_asjes">@paul_asjes</a>.
-            Inspired by <a href="http://coolmaterial.com/food-drink/flowchart-what-style-of-beer-should-you-drink/">
-              Cool Material
-            </a>
-        </div>
+        <Footer />
       </div>
     );
+  }
+
+  private updateWindow() {
+    if (this.waveContainer) {
+      this.setState({
+        width: this.waveContainer.offsetWidth,
+        height: this.waveContainer.offsetHeight,
+      });
+    }
   }
 
   private restart() {
