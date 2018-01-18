@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Beerteller",
+  "name": "Beerteller - What beer should you drink?",
   "icons": [
     {
       "src": "favicon.ico",

@@ -17,6 +17,7 @@
 
 .Result a {
   text-decoration: none;
+  color: blue;
 }
 
 @keyframes slideIn {
