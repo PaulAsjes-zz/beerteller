@@ -23,7 +23,10 @@ class Question extends React.Component<Props> {
     this.setState({
       show: false,
     }, () => {
+      // trigger DOM refresh
+      /* tslint:disable */
       findDOMNode(this).clientHeight;
+      /* tslint:enable */
 
       this.setState({
         show: true,
@@ -36,28 +39,40 @@ class Question extends React.Component<Props> {
       options,
       questionText,
       optionClickFn,
-      restartClickFn,
-      
+      restartClickFn,      
       next,            
     } = this.props;
 
+    const isResult = options.length < 1;
+
     return (
       <div className={`Question ${this.state.show ? 'slideIn' : 'slideOut'}`} >
-        <div className={options.length ? '' : 'Result'}>
-          {questionText}
-        </div>
+        {isResult ? 
+          <span>
+            <div>You should drink</div> 
+            <div className="Result">
+              <a href={`https://www.google.com/search?q=${this.toSearchStr(questionText)}`}>{questionText}</a>
+            </div>
+          </span>
+          : 
+          <div>{questionText}</div>
+          }        
         <div className="Options">
           {options.map((option: string, index: number) => {
             return <Option text={option} key={index} onClick={(e) => optionClickFn(next[index])}/>;
           })}
         </div>
         {
-          options.length < 1 ? 
+          isResult ? 
           <RestartButton onClick={() => restartClickFn()} />
           : null
         }
       </div>
     );
+  }
+
+  private toSearchStr(str: string): string {
+    return str.toLowerCase().replace(' ', '+');
   }
 }
 

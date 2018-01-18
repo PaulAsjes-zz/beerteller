@@ -46,11 +46,6 @@
   min-width: 200px;
 }
 
-.Result {
-  font-size: 42px;
-  padding: 1em;
-}
-
 /* Keep screen in portrait mode */
 @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: landscape) {
   html {

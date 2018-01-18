@@ -10,6 +10,15 @@
   animation: slideOut .5s ease-in-out;
 }
 
+.Result {
+  font-size: 42px;
+  padding: 1em;
+}
+
+.Result a {
+  text-decoration: none;
+}
+
 @keyframes slideIn {
   0% {
     margin-top: -2em;
